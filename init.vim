@@ -158,14 +158,19 @@ set tm=500
 
 " ===== PLUGINS =====
 " vim-plug
-call plug#begin('~/.vim/autoload')
+let uname = substitute(system('uname -a'), '\n', '', '')
+if uname =~# 'microsoft'
+    call plug#begin('~/.local/share/nvim/site/autoload/')
+else
+    call plug#begin('~/.vim/autoload')
+endif
 
 " NERDTRee
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>m :NERDTreeFind<CR>
-let g:NERDTreeWinPos = 'right'
+let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize=55
 let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Modified'  :'✹',
@@ -193,7 +198,7 @@ endif
 
 " Statusline/bar
 Plug 'itchyny/lightline.vim'
-let g:lightline = { 'colorscheme': 'onehalfdark' }
+let g:lightline = { 'colorscheme': 'dracula' }
 
 " Comment with gcc
 Plug 'tpope/vim-commentary'
@@ -287,7 +292,10 @@ Plug 'ryanoasis/vim-devicons'
 set encoding=UTF-8
 
 " OneHalf
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
+" Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
+" Dracula
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 "LSP
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -317,4 +325,4 @@ nnoremap <Leader>li :ALEInfo<cr>
 " Initialize plugin system
 call plug#end()
 
-colorscheme onehalfdark
+colorscheme dracula
